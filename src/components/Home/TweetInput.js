@@ -7,11 +7,19 @@ import GifIcon from "../icons/TweetInput/GifIcon";
 import PollIcon from "../icons/TweetInput/PollIcon";
 import EmojiIcon from "../icons/TweetInput/EmojiIcon";
 import ScheduleIcon from "../icons/TweetInput/ScheduleIcon";
+import PlusIcon from "../icons/TweetInput/PlusIcon";
+import ProgressIcon from "../icons/TweetInput/ProgressIcon";
 
-const TWEET_PRIVACY_VARIANT = {
+const TWEET_PRIVACY_VARIANTS = {
   hidden: { opacity: 0, height: 0, y: -20 },
   visible: { opacity: 1, height: "fit-content", y: 0 },
   exit: { opacity: 0, height: 0, y: -20 },
+};
+
+const TWEET_ACTION_VARIANTS = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
 };
 
 const AVATAR_URL =
@@ -29,7 +37,7 @@ const TweetInput = () => {
   };
 
   return (
-    <div className="flex py-2 px-4 border-b-10 border-gray-800">
+    <div className="flex py-3 px-4 border-b-10 border-gray-800">
       {/* Left Section */}
       <div className="mr-4">
         {/* Avatar */}
@@ -57,7 +65,7 @@ const TweetInput = () => {
         <AnimatePresence>
           {!!inputText && (
             <motion.div
-              variants={TWEET_PRIVACY_VARIANT}
+              variants={TWEET_PRIVACY_VARIANTS}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -73,29 +81,57 @@ const TweetInput = () => {
         </AnimatePresence>
         {/* Tweet Privacy Settings End */}
 
-        {/* Tweet Input Actions */}
-        <div className="flex -ml-2 items-center">
-          {INPUT_ACTIONS.map((Action, idx) => (
-            <span
-              key={idx}
-              className="cursor-pointer p-2 rounded-full bg-transparent hover:bg-secondary subtle-transition"
-            >
-              <Action className="text-2xl text-primary" />
-            </span>
-          ))}
-          {/* Tweet Input Actions End */}
+        {/* Tweet Actions Left */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center -ml-2">
+            {INPUT_ACTIONS.map((Action, idx) => (
+              <span
+                key={idx}
+                className="cursor-pointer p-2 rounded-full bg-transparent hover:bg-secondary subtle-transition"
+              >
+                <Action className="text-2xl text-primary" />
+              </span>
+            ))}
+          </div>
+          {/* Tweet Actions Left End */}
 
-          {/* Tweet Button */}
-          <button
-            disabled={!inputText}
-            className={`ml-auto text-xl font-semibold py-2 px-4 bg-primary rounded-full subtle-transition outline-none ${
-              !inputText && "opacity-50 cursor-not-allowed"
-            }`}
-          >
-            Tweet
-          </button>
+          {/* Tweet Actions Right */}
+          <div className="flex items-center">
+            {/* Plus & Progress */}
+            <AnimatePresence>
+              {!!inputText && (
+                <motion.div
+                  variants={TWEET_ACTION_VARIANTS}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className="flex items-center mr-3"
+                >
+                  <span>
+                    <ProgressIcon className="text-3xl" />
+                  </span>
+                  <div className="w-0 border-l self-stretch border-gray-800 mx-3"></div>
+                  <span className="rounded-full border border-primary p-1 cursor-pointer bg-transparent hover:bg-secondary subtle-transition">
+                    <PlusIcon className="text-2xl text-primary" />
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {/* Plus & Progress End */}
+
+            {/* Tweet Button */}
+            <button
+              disabled={!inputText}
+              className={`text-xl font-semibold py-2 px-4 bg-primary rounded-full subtle-transition outline-none ${
+                !inputText && "opacity-50 cursor-not-allowed"
+              }`}
+            >
+              Tweet
+            </button>
+            {/* Tweet Button End */}
+          </div>
+          {/* Tweet Actions Right End */}
         </div>
-        {/* Tweet Button End */}
       </div>
       {/* Right Section End */}
     </div>
