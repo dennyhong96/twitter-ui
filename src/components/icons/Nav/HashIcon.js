@@ -1,5 +1,3 @@
-import React from "react";
-
 const HashIcon = ({ className, ...rest }) => {
   return (
     <svg

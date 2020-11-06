@@ -21,6 +21,12 @@ module.exports = {
       fontFamily: {
         body: ["Nunito"], // will generate class name: font-body
       },
+      spacing: {
+        14: "3.5rem",
+      },
+      borderWidth: {
+        10: "10px",
+      },
       inset: {
         px: "1px",
         0: "0",
@@ -48,12 +54,33 @@ module.exports = {
     namedGroups: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
   },
   variants: {
-    visibility: ["responsive", "hover", "focus", "active", "group-hover"],
-    opacity: ["responsive", "hover", "focus", "active", "group-hover"],
+    visibility: [
+      "responsive",
+      "hover",
+      "focus",
+      "active",
+      "group-hover",
+      "group-focus",
+    ],
+    opacity: [
+      "responsive",
+      "hover",
+      "focus",
+      "active",
+      "group-hover",
+      "group-focus",
+    ],
     margin: ["responsive", "hover", "focus", "active", "group-hover", "last"],
     translate: ["responsive", "hover", "focus", "active", "group-hover"],
     inset: ["responsive", "hover", "focus", "active", "group-hover"],
-    backgroundColor: ["responsive", "hover", "focus", "active", "group-hover"],
+    backgroundColor: [
+      "responsive",
+      "hover",
+      "focus",
+      "active",
+      "group-hover",
+      "disabled",
+    ],
     textColor: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   plugins: [

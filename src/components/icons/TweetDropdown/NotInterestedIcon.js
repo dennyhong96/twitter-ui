@@ -1,5 +1,3 @@
-import React from "react";
-
 const NotInterestedIcon = ({ className, ...rest }) => {
   return (
     <svg

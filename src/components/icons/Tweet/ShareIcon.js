@@ -1,5 +1,3 @@
-import React from "react";
-
 const ShareIcon = ({ className, ...rest }) => {
   return (
     <svg

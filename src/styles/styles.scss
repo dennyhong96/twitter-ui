@@ -20,6 +20,10 @@
   .main-layout {
     grid-template-columns: 250px 1fr 250px;
   }
+
+  .subtle-transition {
+    @apply transition-all ease-out duration-200;
+  }
 }
 
 /* Custom Styles */

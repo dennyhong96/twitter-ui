@@ -1,5 +1,3 @@
-import React from "react";
-
 const EmbedIcon = ({ className, ...rest }) => {
   return (
     <svg

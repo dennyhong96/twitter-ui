@@ -1,5 +1,3 @@
-import React from "react";
-
 const MoreIcon = ({ className, ...rest }) => {
   return (
     <svg
