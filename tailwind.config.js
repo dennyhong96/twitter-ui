@@ -15,7 +15,7 @@ module.exports = {
           600: "#0083e2",
         },
         secondary: {
-          default: "#253341",
+          default: "#053350",
         },
       },
       fontFamily: {
@@ -50,10 +50,11 @@ module.exports = {
   variants: {
     visibility: ["responsive", "hover", "focus", "active", "group-hover"],
     opacity: ["responsive", "hover", "focus", "active", "group-hover"],
-    margin: ["responsive", "hover", "focus", "active", "group-hover"],
+    margin: ["responsive", "hover", "focus", "active", "group-hover", "last"],
     translate: ["responsive", "hover", "focus", "active", "group-hover"],
     inset: ["responsive", "hover", "focus", "active", "group-hover"],
     backgroundColor: ["responsive", "hover", "focus", "active", "group-hover"],
+    textColor: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   plugins: [
     require("tailwindcss"),

@@ -1,24 +1,80 @@
+import Link from "next/link";
+
 import TwitterLogo from "../components/icons/TwitterLogo";
 import HomeIcon from "../components/icons/Nav/HomeIcon";
+import HashIcon from "../components/icons/Nav/HashIcon";
+import BellIcon from "../components/icons/Nav/BellIcon";
+import MessageIcon from "../components/icons/Nav/MessageIcon";
+import BookmarkIcon from "../components/icons/Nav/BookmarkIcon";
+import ListsIcon from "../components/icons/Nav/ListsIcon";
+import ProfileIcon from "../components/icons/Nav/ProfileIcon";
+import MoreIcon from "../components/icons/Nav/MoreIcon";
 
-export default function Home() {
+import StarsIcon from "../components/icons/StarsIcon";
+
+const SIDE_NAV_OPTIONS = [
+  { title: "Home", Icon: HomeIcon },
+  { title: "Explore", Icon: HashIcon },
+  { title: "Notification", Icon: BellIcon },
+  { title: "Message", Icon: MessageIcon },
+  { title: "Bookmarks", Icon: BookmarkIcon },
+  { title: "Lists", Icon: ListsIcon },
+  { title: "Profile", Icon: ProfileIcon },
+  { title: "More", Icon: MoreIcon },
+];
+
+const Home = () => {
   return (
-    <div className="container mx-auto min-h-screen grid grid-cols-3">
-      <nav>
-        <div>
-          <TwitterLogo className="fill-current w-8" />
-        </div>
-        <ul>
-          <li>
-            <span>
-              <HomeIcon className="fill-current w-6" />
-            </span>
-            <span>Home</span>
-          </li>
+    <div className="container grid main-layout mx-auto min-h-screen ">
+      {/* Side Navigation */}
+      <nav className="flex flex-col items-start">
+        {/* Twitter Logo */}
+        <Link href="/">
+          <a className="group block my-2 p-2 rounded-full hover:bg-secondary transition-all ease-out duration-200">
+            <TwitterLogo className="text-4xl group-hover:text-primary transition-all ease-out duration-200" />
+          </a>
+        </Link>
+        {/* Twitter Logo End */}
+
+        {/* Nav Links */}
+        <ul className="w-full">
+          {SIDE_NAV_OPTIONS.map(({ title, Icon }, idx) => (
+            <li key={idx} className="mb-2 last:mb-0">
+              <Link href="/">
+                <a className="group flex justify-start">
+                  <span className="flex items-center pl-2 pr-4 py-3 rounded-full bg-transparent group-hover:bg-secondary transition-all ease-out duration-200">
+                    <span>
+                      {
+                        <Icon className="group-hover:text-primary transition-all ease-out duration-200" />
+                      }
+                    </span>
+                    <span className="ml-4 text-xl font-bold group-hover:text-primary transition-all ease-out duration-200">
+                      {title}
+                    </span>
+                  </span>
+                </a>
+              </Link>
+            </li>
+          ))}
         </ul>
+        {/* Nav Links End */}
       </nav>
-      <main>Tweets</main>
+      {/* Side Navigation End */}
+
+      {/* Main */}
+      <main className="h-full border-l border-r border-gray-800">
+        <header className="flex justify-between items-center px-4 py-2 border-b border-gray-800">
+          <span className="text-xl font-black">Home</span>
+          <span className="p-2 rounded-full bg-transparent hover:bg-secondary cursor-pointer">
+            <StarsIcon className="text-primary" />
+          </span>
+        </header>
+      </main>
+
+      {/* Aside */}
       <aside>Links</aside>
     </div>
   );
-}
+};
+
+export default Home;
