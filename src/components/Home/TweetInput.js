@@ -44,7 +44,7 @@ const TweetInput = () => {
         <img
           src={AVATAR_URL}
           alt="Denny Hong"
-          className="rounded-full w-14 h-14 object-cover"
+          className="block rounded-full w-14 h-14 object-cover"
         />
         {/* Avatar End */}
       </div>

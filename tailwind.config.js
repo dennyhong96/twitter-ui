@@ -1,3 +1,5 @@
+const { colors } = require("tailwindcss/defaultTheme");
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -9,6 +11,7 @@ module.exports = {
       colors: {
         body: {
           default: "#15202b",
+          light: "#1b2836",
         },
         primary: {
           default: "#1da1f2",
@@ -17,12 +20,22 @@ module.exports = {
         secondary: {
           default: "#053350",
         },
+        green: {
+          ...colors.green,
+          ghost: "rgba(34, 83, 60, 0.5)",
+        },
+        pink: {
+          ...colors.pink,
+          ghost: "rgba(112, 36, 89, 0.5)",
+        },
       },
       fontFamily: {
         body: ["Nunito"], // will generate class name: font-body
       },
       spacing: {
         14: "3.5rem",
+        80: "20rem",
+        100: "25rem",
       },
       borderWidth: {
         10: "10px",

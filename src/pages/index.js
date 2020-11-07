@@ -1,6 +1,9 @@
 import Link from "next/link";
 
 import TweetInput from "../components/Home/TweetInput";
+import TweetCard from "../components/Home/TweetCard";
+
+import USERS from "../../users.json";
 
 import TwitterLogo from "../components/icons/TwitterLogo";
 import HomeIcon from "../components/icons/Nav/HomeIcon";
@@ -14,7 +17,7 @@ import MoreIcon from "../components/icons/Nav/MoreIcon";
 import StarsIcon from "../components/icons/StarsIcon";
 
 const SIDE_NAV_OPTIONS = [
-  { title: "Home", Icon: HomeIcon },
+  { title: "Home", Icon: HomeIcon, active: true },
   { title: "Explore", Icon: HashIcon },
   { title: "Notification", Icon: BellIcon },
   { title: "Message", Icon: MessageIcon },
@@ -26,7 +29,7 @@ const SIDE_NAV_OPTIONS = [
 
 const Home = () => {
   return (
-    <div className="container grid main-layout mx-auto min-h-screen ">
+    <div className="container grid main-layout mx-auto h-screen overflow-hidden">
       {/* Side Navigation */}
       <nav className="flex flex-col items-start">
         {/* Twitter Logo */}
@@ -39,17 +42,25 @@ const Home = () => {
 
         {/* Nav Links */}
         <ul className="w-full">
-          {SIDE_NAV_OPTIONS.map(({ title, Icon }, idx) => (
+          {SIDE_NAV_OPTIONS.map(({ title, Icon, active }, idx) => (
             <li key={idx} className="mb-2 last:mb-0">
               <Link href="/">
                 <a className="group flex justify-start">
                   <span className="flex items-center pl-2 pr-4 py-3 rounded-full bg-transparent group-hover:bg-secondary subtle-transition">
                     <span>
                       {
-                        <Icon className="group-hover:text-primary subtle-transition" />
+                        <Icon
+                          className={`group-hover:text-primary subtle-transition ${
+                            active && "text-primary"
+                          }`}
+                        />
                       }
                     </span>
-                    <span className="ml-4 text-xl font-bold group-hover:text-primary subtle-transition">
+                    <span
+                      className={`ml-4 text-xl font-bold group-hover:text-primary subtle-transition ${
+                        active && "text-primary"
+                      }`}
+                    >
                       {title}
                     </span>
                   </span>
@@ -63,18 +74,39 @@ const Home = () => {
       {/* Side Navigation End */}
 
       {/* Main */}
-      <main className="h-full border-l border-r border-gray-800">
-        <header className="flex justify-between items-center px-4 py-2 border-b border-gray-800">
+      <main className="relative h-full border-l border-r border-gray-800 overflow-y-scroll hide-scrollbar">
+        {/* Header */}
+        <header className="flex justify-between items-center px-4 py-2 border-b border-gray-800 bg-body sticky top-0 z-10">
           <span className="text-xl font-black tracking-wide">Home</span>
           <span className="p-2 rounded-full bg-transparent hover:bg-secondary cursor-pointer subtle-transition">
             <StarsIcon className="text-primary" />
           </span>
         </header>
+        {/* Header End */}
+
+        {/* Tweet Input */}
         <TweetInput />
+        {/* Tweet Input End */}
+
+        {/* Tweet Cards */}
+        {USERS.map((user, idx) => (
+          <TweetCard key={idx} user={user} incrementId={idx} />
+        ))}
+        {/* Tweet Cards End */}
       </main>
+      {/* Main End */}
 
       {/* Aside */}
-      <aside>Links</aside>
+      <aside>
+        {/* Search Input */}
+        {/* Search Input End */}
+
+        {/* What’s happening */}
+        {/* What’s happening End */}
+
+        {/* Who to follow */}
+        {/* Who to follow End */}
+      </aside>
     </div>
   );
 };
