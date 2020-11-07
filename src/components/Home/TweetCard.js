@@ -6,7 +6,19 @@ import CommentIcon from "../icons/Tweet/CommentIcon";
 import HeartIcon from "../icons/Tweet/HeartIcon";
 import RetweetIcon from "../icons/Tweet/RetweetIcon";
 import ShareIcon from "../icons/Tweet/ShareIcon";
+import MessageIcon from "../icons/Tweet/MessageIcon";
+import AddBookmarkIcon from "../icons/Tweet/AddBookmarkIcon";
+import CopyLinkIcon from "../icons/Tweet/CopyLinkIcon";
 import ChevronDownIcon from "../icons/TweetDropdown/ChevronDownIcon";
+
+import NotInterestedIcon from "../icons/TweetDropdown/NotInterestedIcon";
+import UnfollowIcon from "../icons/TweetDropdown/UnfollowIcon";
+import ListAddIcon from "../icons/TweetDropdown/ListAddIcon";
+import MuteIcon from "../icons/TweetDropdown/MuteIcon";
+import BlockIcon from "../icons/TweetDropdown/BlockIcon";
+import EmbedIcon from "../icons/TweetDropdown/EmbedIcon";
+import ReportIcon from "../icons/TweetDropdown/ReportIcon";
+
 import { Fragment } from "react";
 
 const ACTIONS = [
@@ -30,10 +42,20 @@ const ACTIONS = [
   },
 ];
 
-const MENU_OPTIONS = [
-  { name: "Send via Direct Message" },
-  { name: "Add Tweet to Bookmarks" },
-  { name: "Copy link to Tweet" },
+const SHARE_OPTIONS = [
+  { name: "Send via Direct Message", Icon: MessageIcon },
+  { name: "Add Tweet to Bookmarks", Icon: AddBookmarkIcon },
+  { name: "Copy link to Tweet", Icon: CopyLinkIcon },
+];
+
+const MORE_OPTIONS = [
+  { name: "Not interested in this Tweet", Icon: NotInterestedIcon },
+  { name: "Unfollow User", Icon: UnfollowIcon },
+  { name: "Add/remove from Lists", Icon: ListAddIcon },
+  { name: "Mute User", Icon: MuteIcon },
+  { name: "Block User", Icon: BlockIcon },
+  { name: "Embed Tweet", Icon: EmbedIcon },
+  { name: "Report Tweet", Icon: ReportIcon },
 ];
 
 const DROPDOWN_MENU_VARIANTS = {
@@ -41,12 +63,12 @@ const DROPDOWN_MENU_VARIANTS = {
   visible: {
     opacity: 1,
     height: "auto",
-    transition: { duration: 0.15 },
+    transition: { duration: 0.2 },
   },
   exit: {
     opacity: 0,
     height: 0,
-    transition: { duration: 0.15 },
+    transition: { duration: 0.2 },
   },
 };
 
@@ -77,9 +99,46 @@ const TweetCard = ({ user, incrementId }) => {
             <VerifiedIcon className="text-xl" />
           </span>
           <span className="text-gray-500">@{user.login.username} • 15m</span>
-          <span className="ml-auto p-1 bg-transparent hover:bg-secondary rounded-full cursor-pointer">
-            <ChevronDownIcon className="text-lg text-gray-500" />
-          </span>
+
+          <div className="relative ml-auto">
+            <Menu>
+              {({ open }) => (
+                <Fragment>
+                  <Menu.Button className="p-1 bg-transparent hover:bg-secondary rounded-full cursor-pointer">
+                    <ChevronDownIcon className="text-lg text-gray-500" />
+                  </Menu.Button>
+                  <AnimatePresence>
+                    {open && (
+                      <Menu.Items
+                        static
+                        as={motion.div}
+                        variants={DROPDOWN_MENU_VARIANTS}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="absolute right-0 top-0 bg-body twitter-shadow rounded-md focus:outline-none"
+                      >
+                        {MORE_OPTIONS.map(({ name, Icon }, idx) => (
+                          <Menu.Item key={idx}>
+                            {({ active }) => (
+                              <a
+                                className={`whitespace-no-wrap block px-5 py-4 bg-transparent subtle-transition ${
+                                  active && "bg-body-light"
+                                }`}
+                              >
+                                <Icon className="inline-block text-lg text-gray-500 mr-2" />{" "}
+                                {name}
+                              </a>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    )}
+                  </AnimatePresence>
+                </Fragment>
+              )}
+            </Menu>
+          </div>
         </div>
         {/* User Info Row End */}
 
@@ -144,9 +203,9 @@ const TweetCard = ({ user, incrementId }) => {
                         animate="visible"
                         exit="hidden"
                         static
-                        className="absolute right-0 bg-body twitter-shadow rounded-md focus:outline-none"
+                        className="absolute top-0 right-0 bg-body twitter-shadow rounded-md focus:outline-none"
                       >
-                        {MENU_OPTIONS.map((option, idx) => (
+                        {SHARE_OPTIONS.map(({ name, Icon }, idx) => (
                           <Menu.Item key={idx}>
                             {({ active }) => (
                               <a
@@ -154,7 +213,8 @@ const TweetCard = ({ user, incrementId }) => {
                                   active && "bg-body-light"
                                 }`}
                               >
-                                {option.name}
+                                <Icon className="inline-block text-xl mr-2 text-gray-500" />
+                                {name}
                               </a>
                             )}
                           </Menu.Item>
