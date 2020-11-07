@@ -3,8 +3,6 @@ import Link from "next/link";
 import VerifiedIcon from "../icons/VerifiedIcon";
 import USERS from "../../../users.json";
 
-console.log(USERS);
-
 const Follow = ({ className = "" }) => {
   return (
     <div
