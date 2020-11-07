@@ -2,7 +2,7 @@ const SearchIcon = ({ className, ...rest }) => {
   return (
     <svg
       {...rest}
-      className={`fill-current text-white text-3xl ${className}`}
+      className={`fill-current text-white ${className}`}
       width="1em"
       height="1em"
       viewBox="0 0 24 24"

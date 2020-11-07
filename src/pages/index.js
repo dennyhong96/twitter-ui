@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import TweetInput from "../components/Home/TweetInput";
 import TweetCard from "../components/Home/TweetCard";
+import SearchInput from "../components/Home/SearchInput";
 
 import USERS from "../../users.json";
 
@@ -29,7 +30,7 @@ const SIDE_NAV_OPTIONS = [
 
 const Home = () => {
   return (
-    <div className="container grid main-layout mx-auto h-screen overflow-hidden">
+    <div className="container grid main-layout gap-8 mx-auto h-screen">
       {/* Side Navigation */}
       <nav className="flex flex-col items-start">
         {/* Twitter Logo */}
@@ -99,6 +100,7 @@ const Home = () => {
       {/* Aside */}
       <aside>
         {/* Search Input */}
+        <SearchInput />
         {/* Search Input End */}
 
         {/* What’s happening */}
