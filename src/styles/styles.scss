@@ -11,6 +11,15 @@
   body {
     @apply bg-body text-gray-100;
   }
+
+  button {
+    outline: none;
+
+    &:focus,
+    &:hover {
+      outline: none;
+    }
+  }
 }
 
 @layer components {

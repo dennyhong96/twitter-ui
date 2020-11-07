@@ -1,9 +1,13 @@
+import { Menu } from "@headlessui/react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import VerifiedIcon from "../icons/VerifiedIcon";
 import CommentIcon from "../icons/Tweet/CommentIcon";
 import HeartIcon from "../icons/Tweet/HeartIcon";
 import RetweetIcon from "../icons/Tweet/RetweetIcon";
 import ShareIcon from "../icons/Tweet/ShareIcon";
 import ChevronDownIcon from "../icons/TweetDropdown/ChevronDownIcon";
+import { Fragment } from "react";
 
 const ACTIONS = [
   {
@@ -24,8 +28,27 @@ const ACTIONS = [
     bg: "bg-pink-ghost",
     showQty: true,
   },
-  { Icon: ShareIcon, color: "text-primary", bg: "bg-secondary" },
 ];
+
+const MENU_OPTIONS = [
+  { name: "Send via Direct Message" },
+  { name: "Add Tweet to Bookmarks" },
+  { name: "Copy link to Tweet" },
+];
+
+const DROPDOWN_MENU_VARIANTS = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "auto",
+    transition: { duration: 0.15 },
+  },
+  exit: {
+    opacity: 0,
+    height: 0,
+    transition: { duration: 0.15 },
+  },
+};
 
 const getRandNum = () => Math.floor(Math.random() * 1000);
 
@@ -80,9 +103,8 @@ const TweetCard = ({ user, incrementId }) => {
         {/* Actions */}
         <div className="grid grid-cols-4 justify-items-start -ml-2">
           {ACTIONS.map(({ Icon, color, bg, showQty }, idx) => (
-            <span className="group flex items-center">
+            <span key={idx} className="group flex items-center">
               <span
-                key={idx}
                 className={`p-2 bg-transparent hover:${bg} cursor-pointer rounded-full`}
               >
                 <Icon
@@ -98,6 +120,54 @@ const TweetCard = ({ user, incrementId }) => {
               )}
             </span>
           ))}
+
+          {/* Dropdown Menu */}
+          <div className="relative">
+            <Menu>
+              {({ open }) => (
+                <Fragment>
+                  {/* Menu Button */}
+                  <Menu.Button className="p-2 bg-transparent hover:bg-secondary cursor-pointer rounded-full">
+                    <ShareIcon
+                      className={`text-xl text-gray-500 group-hover:text-primary`}
+                    />
+                  </Menu.Button>
+                  {/* Menu Button End */}
+
+                  {/* Menu Items */}
+                  <AnimatePresence>
+                    {open && (
+                      <Menu.Items
+                        as={motion.div}
+                        variants={DROPDOWN_MENU_VARIANTS}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        static
+                        className="absolute right-0 bg-body twitter-shadow rounded-md focus:outline-none"
+                      >
+                        {MENU_OPTIONS.map((option, idx) => (
+                          <Menu.Item key={idx}>
+                            {({ active }) => (
+                              <a
+                                className={`block whitespace-no-wrap py-3 px-5 bg-transparent subtle-transition ${
+                                  active && "bg-body-light"
+                                }`}
+                              >
+                                {option.name}
+                              </a>
+                            )}
+                          </Menu.Item>
+                        ))}
+                      </Menu.Items>
+                    )}
+                  </AnimatePresence>
+                  {/* Menu Items End */}
+                </Fragment>
+              )}
+            </Menu>
+            {/* Dropdown Menu End */}
+          </div>
         </div>
         {/* Actions End */}
       </div>

@@ -122,8 +122,8 @@ const TweetInput = () => {
             {/* Tweet Button */}
             <button
               disabled={!inputText}
-              className={`text-xl font-semibold py-2 px-4 bg-primary rounded-full subtle-transition outline-none ${
-                !inputText && "opacity-50 cursor-not-allowed"
+              className={`text-xl font-semibold py-2 px-4 bg-primary rounded-full outline-none hover:bg-primary-600 subtle-transition ${
+                !inputText && "opacity-50 hover:bg-primary cursor-not-allowed"
               }`}
             >
               Tweet
