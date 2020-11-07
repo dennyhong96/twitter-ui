@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Menu } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -10,7 +11,6 @@ import MessageIcon from "../icons/Tweet/MessageIcon";
 import AddBookmarkIcon from "../icons/Tweet/AddBookmarkIcon";
 import CopyLinkIcon from "../icons/Tweet/CopyLinkIcon";
 import ChevronDownIcon from "../icons/TweetDropdown/ChevronDownIcon";
-
 import NotInterestedIcon from "../icons/TweetDropdown/NotInterestedIcon";
 import UnfollowIcon from "../icons/TweetDropdown/UnfollowIcon";
 import ListAddIcon from "../icons/TweetDropdown/ListAddIcon";
@@ -18,8 +18,6 @@ import MuteIcon from "../icons/TweetDropdown/MuteIcon";
 import BlockIcon from "../icons/TweetDropdown/BlockIcon";
 import EmbedIcon from "../icons/TweetDropdown/EmbedIcon";
 import ReportIcon from "../icons/TweetDropdown/ReportIcon";
-
-import { Fragment } from "react";
 
 const ACTIONS = [
   {
@@ -80,18 +78,56 @@ const TweetCard = ({ user, incrementId }) => {
     <div className="flex py-3 px-4 border-b border-gray-800 w-full cursor-pointer bg-transparent hover:bg-body-light transition ease-out duration-200">
       {/* Card Left */}
       <div className="mr-4">
-        <img
-          src={user.picture.large}
-          alt={user.name.first}
-          className="block rounded-full w-14 h-14 object-cover max-w-none"
-        />
+        <div className="group relative">
+          <img
+            src={user.picture.large}
+            alt={user.name.first}
+            className="block rounded-full w-14 h-14 object-cover max-w-none"
+          />
+
+          {/* User Popup Card */}
+          <div className="absolute p-4 bg-body rounded-xl twitter-shadow opacity-0 invisible group-hover:opacity-100 group-hover:visible subtle-transition delay-150">
+            <div className="flex justify-between items-start w-64 mb-3">
+              <img
+                src={user.picture.large}
+                alt={user.name.first}
+                className="block rounded-full w-16 h-16 object-cover max-w-none"
+              />
+              <button className="bg-primary hover:bg-primary-600 subtle-transition font-bold px-5 py-2 rounded-full">
+                Following
+              </button>
+            </div>
+            <div className="flex flex-col mb-3">
+              <span className="font-bold mr-2">
+                {user.name.first} {user.name.last}
+                <VerifiedIcon className="inline-block text-xl ml-1" />
+              </span>
+              <span className="text-gray-500">@{user.login.username}</span>
+            </div>
+            <p className="leading-tight mb-3">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Perspiciatis maxime ab placeat iste, nesciunt accusantium.
+            </p>
+            <div>
+              <span className="mr-4">
+                <span className="font-bold mr-2">{getRandNum()}</span>
+                <span className="text-gray-500">Following</span>
+              </span>
+              <span>
+                <span className="font-bold mr-2">{getRandNum()}</span>
+                <span className="text-gray-500">Followers</span>
+              </span>
+            </div>
+          </div>
+          {/* User Popup Card End */}
+        </div>
       </div>
       {/* Card Lef End */}
 
       {/* Card Right */}
       <div className="flex-grow flex flex-col">
         {/* User Info Row */}
-        <div className="flex items-center">
+        <div className="flex items-center cursor-pointer">
           <span className="font-bold mr-2">
             {user.name.first} {user.name.last}
           </span>
@@ -100,13 +136,18 @@ const TweetCard = ({ user, incrementId }) => {
           </span>
           <span className="text-gray-500">@{user.login.username} • 15m</span>
 
+          {/* Menu */}
           <div className="relative ml-auto">
             <Menu>
               {({ open }) => (
                 <Fragment>
+                  {/* Menu Button */}
                   <Menu.Button className="p-1 bg-transparent hover:bg-secondary rounded-full cursor-pointer">
                     <ChevronDownIcon className="text-lg text-gray-500" />
                   </Menu.Button>
+                  {/* Menu Button End */}
+
+                  {/* Menu Items */}
                   <AnimatePresence>
                     {open && (
                       <Menu.Items
@@ -122,7 +163,7 @@ const TweetCard = ({ user, incrementId }) => {
                           <Menu.Item key={idx}>
                             {({ active }) => (
                               <a
-                                className={`whitespace-no-wrap block px-5 py-4 bg-transparent subtle-transition ${
+                                className={`whitespace-no-wrap block px-5 py-4 bg-transparent subtle-transition focus:outline-none ${
                                   active && "bg-body-light"
                                 }`}
                               >
@@ -135,10 +176,12 @@ const TweetCard = ({ user, incrementId }) => {
                       </Menu.Items>
                     )}
                   </AnimatePresence>
+                  {/* Menu Items End */}
                 </Fragment>
               )}
             </Menu>
           </div>
+          {/* Menu End */}
         </div>
         {/* User Info Row End */}
 
@@ -209,7 +252,7 @@ const TweetCard = ({ user, incrementId }) => {
                           <Menu.Item key={idx}>
                             {({ active }) => (
                               <a
-                                className={`block whitespace-no-wrap py-3 px-5 bg-transparent subtle-transition ${
+                                className={`block whitespace-no-wrap py-3 px-5 bg-transparent subtle-transition focus:outline-none ${
                                   active && "bg-body-light"
                                 }`}
                               >

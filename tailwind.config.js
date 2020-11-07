@@ -101,6 +101,7 @@ module.exports = {
       "disabled",
     ],
     textColor: ["responsive", "hover", "focus", "active", "group-hover"],
+    outline: ["responsive", "hover", "focus", "active", "group-hover"],
   },
   plugins: [
     require("tailwindcss"),
