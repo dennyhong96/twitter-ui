@@ -20,6 +20,10 @@ module.exports = {
         secondary: {
           default: "#053350",
         },
+        tertiary: {
+          default: "#192734",
+          light: "#1f303f",
+        },
         green: {
           ...colors.green,
           ghost: "rgba(34, 83, 60, 0.5)",
@@ -27,6 +31,7 @@ module.exports = {
         pink: {
           ...colors.pink,
           ghost: "rgba(112, 36, 89, 0.5)",
+          hot: "rgb(224, 36, 94)",
         },
       },
       fontFamily: {
@@ -34,6 +39,7 @@ module.exports = {
       },
       spacing: {
         14: "3.5rem",
+        18: "4.375rem",
         80: "20rem",
         100: "25rem",
       },
