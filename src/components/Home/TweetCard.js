@@ -22,20 +22,20 @@ import ReportIcon from "../icons/TweetDropdown/ReportIcon";
 const ACTIONS = [
   {
     Icon: CommentIcon,
-    color: "text-primary",
-    bg: "bg-secondary",
+    color: "group-hover:text-primary",
+    bg: "hover:bg-secondary",
     showQty: true,
   },
   {
     Icon: RetweetIcon,
-    color: "text-green-500",
-    bg: "bg-green-ghost",
+    color: "group-hover:text-green-500",
+    bg: "hover:bg-green-ghost",
     showQty: true,
   },
   {
     Icon: HeartIcon,
-    color: "text-pink-500",
-    bg: "bg-pink-ghost",
+    color: "group-hover:text-pink-500",
+    bg: "hover:bg-pink-ghost",
     showQty: true,
   },
 ];
@@ -142,8 +142,8 @@ const TweetCard = ({ user, incrementId }) => {
               {({ open }) => (
                 <Fragment>
                   {/* Menu Button */}
-                  <Menu.Button className="p-1 bg-transparent hover:bg-secondary rounded-full cursor-pointer">
-                    <ChevronDownIcon className="text-lg text-gray-500" />
+                  <Menu.Button className="group p-1 bg-transparent hover:bg-secondary rounded-full cursor-pointer">
+                    <ChevronDownIcon className="text-lg text-gray-500 group-hover:text-primary" />
                   </Menu.Button>
                   {/* Menu Button End */}
 
@@ -207,16 +207,12 @@ const TweetCard = ({ user, incrementId }) => {
           {ACTIONS.map(({ Icon, color, bg, showQty }, idx) => (
             <span key={idx} className="group flex items-center">
               <span
-                className={`p-2 bg-transparent hover:${bg} cursor-pointer rounded-full`}
+                className={`p-2 bg-transparent ${bg} cursor-pointer rounded-full`}
               >
-                <Icon
-                  className={`text-xl text-gray-500 group-hover:${color}`}
-                />
+                <Icon className={`text-xl text-gray-500 ${color}`} />
               </span>
               {showQty && (
-                <span
-                  className={`ml-1 text-gray-500 text-sm group-hover:${color}`}
-                >
+                <span className={`ml-1 text-gray-500 text-sm ${color}`}>
                   {getRandNum()}
                 </span>
               )}
@@ -229,7 +225,7 @@ const TweetCard = ({ user, incrementId }) => {
               {({ open }) => (
                 <Fragment>
                   {/* Menu Button */}
-                  <Menu.Button className="p-2 bg-transparent hover:bg-secondary cursor-pointer rounded-full">
+                  <Menu.Button className="group p-2 bg-transparent hover:bg-secondary cursor-pointer rounded-full">
                     <ShareIcon
                       className={`text-xl text-gray-500 group-hover:text-primary`}
                     />

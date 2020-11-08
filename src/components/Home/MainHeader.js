@@ -1,4 +1,5 @@
 import StarsIcon from "../icons/StarsIcon";
+import { Menu } from "@headlessui/react";
 
 const MainHeader = () => {
   return (
